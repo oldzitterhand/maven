@@ -1,0 +1,108 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+ 
+	<groupId>integration-tests</groupId>
+	<artifactId>integration-tests</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<profiles>
+		<profile>
+			<id>unit-tests</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<skipUnitTests>false</skipUnitTests>
+				<skipIntegTests>true</skipIntegTests>
+			</properties>
+		</profile>
+		<profile>
+			<id>integ-tests</id>
+			<properties>
+				<skipUnitTests>false</skipUnitTests>
+				<skipIntegTests>false</skipIntegTests>
+			</properties>
+		</profile>
+		<profile>
+			<id>no-tests</id>
+			<properties>
+				<skipUnitTests>true</skipUnitTests>
+				<skipIntegTests>true</skipIntegTests>
+			</properties>
+		</profile>
+	</profiles>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.13</version>
+	           <dependencies>
+	               <dependency>
+	                   <groupId>org.apache.maven.surefire</groupId>
+	                   <artifactId>surefire-junit47</artifactId>
+	                   <version>2.13</version>
+	               </dependency>
+	           </dependencies>
+				<executions>
+					<execution>
+						<id>unit-tests</id>
+						<phase>test</phase>
+						<goals>
+							<goal>test</goal>
+						</goals>
+						<configuration>
+							<skip>${skipUnitTests}</skip>
+							<includes>
+		                   		<include>**/*.java</include>
+		               		</includes>
+							<excludedGroups>de.oldzitterhand.IntegrationTest</excludedGroups>
+						</configuration>
+					</execution>
+					<execution>
+						<id>integ-tests</id>
+						<phase>test</phase>
+						<goals>
+							<goal>test</goal>
+						</goals>
+						<configuration>
+							<skip>${skipIntegTests}</skip>
+							<includes>
+		                   		<include>**/*.java</include>
+		               		</includes>
+							<groups>de.oldzitterhand.IntegrationTest</groups>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			
+		</plugins>
+	</build>
+	
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+	
+</project>
