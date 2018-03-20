@@ -11,13 +11,13 @@ Note that another category interface (NoneExclusion) is needed to switch off all
 		</activation>
 		<properties>
 			<testcase.groups></testcase.groups>
-			<testcase.excludedgroups>com.commerzbank.risk.ap.server.integration.IntegrationTest</testcase.excludedgroups>
+			<testcase.excludedgroups>com.myCompany.IntegrationTest</testcase.excludedgroups>
 		 </properties>
 	</profile>
 	<profile>
 		<id>integration-tests</id>
 		<properties>
-			<testcase.groups>com.commerzbank.risk.ap.server.integration.IntegrationTest</testcase.groups>
+			<testcase.groups>com.myCompany.IntegrationTest</testcase.groups>
 			<testcase.excludedgroups></testcase.excludedgroups>
 		</properties>
 	</profile>
@@ -32,7 +32,7 @@ Note that another category interface (NoneExclusion) is needed to switch off all
 		<id>no-tests</id>
 		<properties>
 			<!-- Using a Dummy interface which is not used by any junit category will make sure no tests are running! -->
-			<testcase.groups>com.commerzbank.risk.ap.server.integration.NoneExclusion</testcase.groups>
+			<testcase.groups>com.myCompany.NoneExclusion</testcase.groups>
 			<testcase.excludedgroups></testcase.excludedgroups>
 		</properties>
 	</profile>
